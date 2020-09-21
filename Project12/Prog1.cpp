@@ -251,52 +251,46 @@ namespace Prog1 {
 		return result;
 	}
 
-	Item* SortedInsert1(Item* Head, Item* NewNode)
+	Item* SortedInsert1(Item* head, Item* node)
 	{
-		if (Head == NULL || Head->num >= NewNode->num)
+		if (head == NULL || node->num > head->num)
 		{
-			NewNode->next = Head;
-			Head = NewNode;
-			return Head;
+			node->next = head;
+			head = node;
 		}
-
-		Item* ptr = Head;
-		Item* prev = NULL;
-
-		while (ptr != NULL && ptr->num < NewNode->num)
+		else
 		{
-			prev = ptr;
-			ptr = ptr->next;
+			Item* current = head;
+			while (current->next && !(node->num > current->next->num))
+			{
+				current = current->next;
+			}
+
+			node->next = current->next;
+			current->next = node;
 		}
-
-		NewNode->next = ptr;
-		prev->next = NewNode;
-
-		return Head;
+		return head;
 	}
 
-	Item* SortedInsert2(Item* Head, Item* NewNode)
+	Item* SortedInsert2(Item* head, Item* node)
 	{
-		if (Head == NULL || Head->num >= NewNode->num)
+		if (head == NULL || node->num < head->num)
 		{
-			NewNode->next = Head;
-			Head = NewNode;
-			return Head;
+			node->next = head;
+			head = node;
 		}
-
-		Item* ptr = Head;
-		Item* prev = NULL;
-
-		while (ptr != NULL && ptr->num > NewNode->num)
+		else
 		{
-			prev = ptr;
-			ptr = ptr->next;
+			Item* current = head;
+			while (current->next && !(node->num < current->next->num))
+			{
+				current = current->next;
+			}
+
+			node->next = current->next;
+			current->next = node;
 		}
-
-		NewNode->next = ptr;
-		prev->next = NewNode;
-
-		return Head;
+		return head;
 	}
 
 	void result(Row* R)
@@ -324,7 +318,7 @@ namespace Prog1 {
 
 	int findfe(Item* ptr) {
 		while (ptr != NULL) {
-			if (ptr->X == 1) {
+			if (ptr->X == 0) {
 				if (ptr->num > 0)
 					return 1;
 				else return -1;
