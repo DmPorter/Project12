@@ -1,17 +1,15 @@
 #include <iostream>
 #include <iomanip>
-#include <vector>
-#include <algorithm>  // sort
 #include "Prog1.h"
 
 namespace Prog1 {
-	const char* pr = ""; // будущее сообщение об ошибке
-	// функция ввода
+	const char* pr = "";
+
 	Row* input(Row* head, int* a, int* b)
 	{
 		int MAX_X = 0, MAX_Y = 0, a1, b1;
 		Row* R = nullptr;
-		int m; //кол-вo элементов
+		int m;
 		std::cout << "How many elements are there in the matrix?-->";
 		if (!getNum(m) || m == 0) return nullptr;
 		std::cout << "Enter items for matrix:" << std::endl;
@@ -77,7 +75,8 @@ namespace Prog1 {
 		} while (MAX_Y + 1 > * b);
 		return head;
 	}
-	//input Items
+
+
 	void output(const char* msg, Row* head, int* a, int* b)
 	{
 		int i, j;
@@ -114,12 +113,14 @@ namespace Prog1 {
 			j = *b - R->i - 1;
 		for (j; j > 0; j--, print_0(*a - 1));
 	}
-	//вывод 0 вместо пустых элементов
+
+
 	void print_0(int MAX_X) {
 		for (MAX_X; MAX_X >= 0; MAX_X--, std::cout << std::setw(3) << std::setprecision(3) << 0 << "  ");
 		std::cout << std::endl;
 	}
-	//clear memory
+
+
 	void erase(Row* Head_R)
 	{
 		Item* I, * Head_I;
@@ -146,7 +147,8 @@ namespace Prog1 {
 			delete R;
 		}
 	}
-	//вставка ряда
+
+
 	Row* input_Row(Row* r, Row* head) {
 		if ((r->i) > (head->i))
 			if (head->next) {
@@ -171,7 +173,8 @@ namespace Prog1 {
 			return r;
 		}
 	};
-	//вставка элемента
+
+
 	Item* input_Item(Item* i, Item* head) {
 		if ((i->X) >= (head->X))
 			if (head->next) {
@@ -207,7 +210,8 @@ namespace Prog1 {
 			return i;
 		    }
 	};
-	//поиск ряда
+
+
 	Row* find_Row(int i, Row* head) {
 		Row* R = head;
 		if (R) {
@@ -330,16 +334,4 @@ namespace Prog1 {
 		return -1;
 	}
 
-	double SUM(Item* I) {
-		double sum = I->num;
-		while (I->next) {
-			I = I->next;
-			sum = sum + I->num;
-		}
-		return sum;
-	}
-
-	bool comp(double a, double b) {
-		return a > b;
-	}
 }
